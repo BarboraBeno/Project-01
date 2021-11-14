@@ -1,16 +1,18 @@
 # Project-01 Aromatherapy - Plants Web App
-This project started during the process of learning Java. 
+Basic web app project using Java.
 
 Plant Web App allows user to :
-Add Plants to the list
-Filter Plants
-Delete Plants
+- Add Plants to the list
+- Filter Plants
+- Edit plants
+- Delete Plants
+- Show my list
 
 Technology used :
 Sql database
-Spring framework
+Spring 
+Spring Boot 
 Thymeleaf
 Hibernate
 IntelliJ IDEA
-Postman
-JUnit5
+Html, Css
