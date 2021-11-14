@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Edit plant</title>
+</head>
+<body>
+<div>
+  <h3>Edit plant</h3>
+  <form th:action="@{|/${loginName}/edit|}" method="post">
+    <input type="text" name="id" th:value="${plant.id}" hidden>
+    <label>Plant name:
+      <input type="text" name="plantName">
+    </label>
+    <label>Latin name:
+      <input type="text" name="latinName">
+    </label>
+    <label for="quantity">Strength of scent (between 1 and 5):</label>
+    <input type="number" id="quantity" name="strength" min="1" max="5">
+    <label>For kids:
+      <input type="checkbox" name="forKids" value="true">
+    </label>
+    <label>Used:
+      <input type="checkbox" name="used" value="true">
+    </label>
+    <label>Unused:
+      <input type="checkbox" name="used" value="false">
+    </label>
+    <label>
+      <select name="problem">
+        <option th:each="problem : ${listOfProblems}"
+                th:text="*{problem.problem}" th:value="${problem.id}"></option>
+      </select>
+    </label>
+    <input type="submit" value="Add plant">
+  </form>
+</div>
+</body>
+</html>

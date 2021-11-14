@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Content Page</title>
+</head>
+<body >
+<div class="main">
+<h1>Aromatherapy and essential oils</h1>
+<h3>The power of nature</h3>
+    <hr>
+<div class="nav">
+    <a class="btn btn-light" th:href="@{|/${loginName}|}" role="button">Home</a>
+    <a class="btn btn-light" th:href="@{|/${loginName}/myList|}" role="button">My List</a>
+    <a class="btn btn-light" th:href="@{|/${loginName}/used|}" role="button">Filter used</a>
+    <a class="btn btn-light" th:href="@{|/${loginName}/unused|}" role="button">Filter Unused</a>
+    <a class="btn btn-light" th:href="@{|/${loginName}/strength|}" role="button">Filter By Strength</a>
+    <a class="btn btn-light" th:href="@{|/${loginName}/kidsafe|}" role="button">Filter By for Kids</a>
+    <a class="btn btn-light" href="/logout" role="button">Logout</a>
+</div>
+<div class="plant">
+    <h3>Add new plant</h3><br>
+    <form th:action="@{/${loginName}/add}" method="post">
+        <label>Plant name:
+            <input type="text" name="plantName">
+        </label>
+        <label>Latin name:
+            <input type="text" name="latinName">
+        </label>
+        <label for="quantity">Strength of scent (between 1 and 5):</label>
+        <input type="number" id="quantity" name="strength" min="1" max="5">
+        <label>For kids:
+            <input type="checkbox" name="forKids" value="true">
+        </label>
+        <label>Select problem:
+            <select name="problem">
+                <option th:each="problem : ${listOfProblems}"
+                        th:text="*{problem.problem}" th:value="${problem.id}"></option>
+            </select>
+        </label>
+        <label>Add new problem:
+            <input type="text" name="problemadd">
+            <input type="submit" value="add problem">
+        </label>
+        <input type="submit" value="Add plant">
+    </form>
+</div>
+    <br>
+<div class="problem">
+    <h3>Change the problem for the plant</h3><br>
+    <form th:action="@{|/${loginName}/change|}" method="post" class="form-group">
+        <label>Choose plant to change the problem.
+            <select name="plant">
+                <option th:each="plant : ${listOfPlants}"
+                        th:value="${plant.id}"
+                        th:text="${plant.plantName}">
+                </option>
+            </select>
+        </label>
+        <label>Choose problem for the selected plant.
+            <select name="problem">
+                <option
+                        th:each="problem : ${listOfProblems}"
+                        th:value="${problem.id}"
+                        th:text="${problem.problem}">
+                </option>
+            </select>
+        </label><br>
+        <button type="submit">Change the problem</button>
+    </form>
+    <br>
+</div>
+</div>
+<p style="background-color: rgba(255,0,0,0.3);" class="error" th:text="${error3} != null ? ${error3} : ''"></p>
+<div>
+    <h3 th:if="${listOfPlants.isEmpty()}">No Plants in database</h3>
+    <table class="table table.hover" th:unless="${listOfPlants.isEmpty()}">
+        <thead>
+        <tr>
+            <th>NAME OF PLANT</th>
+            <th>LATIN NAME</th>
+            <th>STRENGTH OF SCENT</th>
+            <th>KIDS</th>
+            <th>PROBLEM</th>
+            <th>USED</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="plant : ${listOfPlants}" th:object="${plant}">
+            <td th:text="*{plantName}"></td>
+            <td th:text="*{latinName}"></td>
+            <td th:text="*{strength}"></td>
+            <td th:text="*{forKids}"></td>
+            <td th:text="*{problem} != null ? ${plant.problem.problem} : 'No'"></td>
+            <td><a th:href="'/${loginName}/used/' + ${plant.id}" th:text="*{used} == true ? 'Used' : 'Unused'"></a></td>
+            <td><a th:href="@{|/${loginName}/remove/*{id}|}" class="badge badge-danger">DEL</a></td>
+            <td><a th:href="@{|/${loginName}/edit/*{id}|}" class="badge badge-warning">EDIT</a></td>
+            <td><a th:href="@{|/${loginName}/myList/*{id}|}" class="badge badge-success">ADD TO MY LIST</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
