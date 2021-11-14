@@ -9,10 +9,12 @@ Plant Web App allows user to :
 - Show my list
 
 Technology used :
-Sql database
-Spring 
-Spring Boot 
-Thymeleaf
-Hibernate
-IntelliJ IDEA
-Html, Css
+- MySQL database
+- Spring 
+- Spring Boot 
+- Thymeleaf
+- Hibernate
+- IntelliJ IDEA
+- Html, Css
+- MVC design pattern
+- Gradle
