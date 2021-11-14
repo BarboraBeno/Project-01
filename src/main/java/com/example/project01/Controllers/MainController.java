@@ -14,20 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/{loginName}")
 public class MainController {
 
-    private PlantService plantService;
-    private PlantRepository plantRepository;
-
-    private ProblemRepository problemRepository;
-    private ProblemService problemService;
-
-    private UserRepository userRepository;
+    private final PlantService plantService;
+    private final PlantRepository plantRepository;
+    private final ProblemRepository problemRepository;
+    private final ProblemService problemService;
+    private final UserRepository userRepository;
 
 
     @Autowired

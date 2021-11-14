@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlantServiceImpl implements PlantService{
 
-    private PlantRepository plantRepository;
+    private final PlantRepository plantRepository;
 
     @Autowired
     public PlantServiceImpl(PlantRepository plantRepository) {

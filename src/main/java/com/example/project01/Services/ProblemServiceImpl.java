@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProblemServiceImpl implements ProblemService{
 
-    private ProblemRepository problemRepository;
+    private final ProblemRepository problemRepository;
 
     @Autowired
     public ProblemServiceImpl(ProblemRepository problemRepository) {
